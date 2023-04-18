@@ -1,4 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react'
+import styles from './../styles/chat';
+import { AiOutlineSend } from "react-icons/ai";
 
 const Chat = ({socket}) => {
 
@@ -28,17 +30,26 @@ const Chat = ({socket}) => {
   }
 
   return (
-    <div>
-      <h1>Chat</h1>
-      {
-        messageList.map((message, index) => ( // parenteses to render
-          <p key={index}>
-            {message.author}: {message.text}
-          </p>
-        ))
-      }
-      <input ref={messageRef} type='text' placeholder='Message' />
-      <button onClick={() => handleSubmit()}>Send</button>
+    <div className='w-4/12 flex flex-col justify-center items-center bg-white rounded-lg p-4'>
+      <h1 className='text-2xl font-semibold text-indigo-900'>Real Time Chat!</h1>
+      <div className='flex flex-col overflow-y-scroll	w-full h-[550px] px-[10px]'>
+        {
+          messageList.map((message, index) => ( // parenteses to render
+          <div className={`${styles.baseMessage} ${message.authorId === socket.id && styles.sendedMessage}`} key={index}>
+            <div className="message-author"><strong>{message.author}</strong></div>
+            <div className="message-text">{message.text}</div>
+          </div>
+          ))
+        }
+      </div>
+      <div className='w-full flex items-end'>
+        <input
+          ref={messageRef}
+          placeholder='Type your message'
+          className='peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-sky-400 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50'
+        />
+        <AiOutlineSend className='h-6 w-6' onClick={() => handleSubmit()}/>
+      </div>
     </div>
   )
 }
