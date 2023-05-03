@@ -2,7 +2,7 @@
 Developed with Vite - React, socket.io, Express and TailwindCss
 
 # ABOUT
-This project was developted in order to studie a bit about Socket.io
+This project was developted in order to study a bit about Socket.io
 
 # HOW TO USE
 It's very easy, just run `yarn` or `npm install` on each folders (client and server) and then you can run both with `yarn dev` or `npm run dev`
